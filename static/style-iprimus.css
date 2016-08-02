@@ -1,0 +1,77 @@
+body{
+    background-color:white;
+    margin:0px 200px;
+    word-wrap:break-word;
+}
+table, td{
+    border: 1px solid;
+    border-collapse: collapse;
+    vertical-align: middle;
+}
+input{
+    font-size: 100%;
+}
+td{
+    width:20px;
+}
+
+table.anglo{
+    font-size: 100%;
+    width: 100%;  
+}
+
+td.anglo{    
+    width: 48%;
+}
+
+img.standard{
+    height: 300px;
+}
+
+.sudoku{
+}
+.palindrome{
+    background-color: yellow;
+}
+th{
+    text-align:center;
+}   
+td.b{
+    font-size: normal;  
+}
+span.toggle{
+}
+span.link, span.link2{
+    text-decoration:underline;
+    color:blue;
+    cursor:pointer;
+}
+span.main{
+}
+span.xl{
+    font-size: x-large;
+}
+.l{
+    font-size: large;
+}
+span.sudoku{
+    font-family: "Courier New", Courier, monospace
+}
+
+img.small{
+    width:550px;
+}
+img.large{
+    width:80%;
+}
+li{
+}
+.ta{
+    width: 50%;
+    height: 100px;
+}
+.float{
+    float:left;
+    margin-right:20px;
+}
+

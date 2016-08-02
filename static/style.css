@@ -1,0 +1,62 @@
+body{
+    background-color:white;
+    margin:0px 133px;
+    word-wrap:break-word;
+    font-family: sans-serif;
+}
+table, td{
+    border: 1px solid;
+    border-collapse: collapse;
+    vertical-align: top;
+    font-size: 125%;    
+    font-family: sans-serif;       
+}
+li{
+}
+.large{
+    font-size: 125%;
+}
+td{
+    width: 30px;    
+}    
+
+td.b{
+    font-size: normal;  
+}
+span.xl{
+    font-size: x-large;
+}
+span.l{
+    font-size: large;
+}
+span.sudoku{
+    font-family: "Courier New", Courier, monospace
+}
+img {
+    vertical-align: middle;
+}
+div.sudoku{
+	float: left;
+	padding-right: 50px;
+div{
+	clear:left;
+}
+}
+img.standard{
+    height: 300px;
+}
+
+.ta{
+    width: 50%;
+    height: 100px;
+}
+img.tetris{
+    width: 40%;
+}
+img.pinterest{
+    width: 100%;
+}   
+span.red{
+    font-weight: normal;
+    color: red;
+}    
