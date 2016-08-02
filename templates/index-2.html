@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").load("static/test.txt");
+    });
+});
+</script>
+<title>Welcome</title>
+<style>
+body{
+    background-color: white;
+    margin: 0px 200px;
+    word-wrap: break-word;
+}
+table, td{
+    border: 1px solid;
+    border-collapse: collapse;
+    vertical-align: top;
+    bbackground-color: #EEEEEE;
+    bbackground-color: lightgrey;
+}
+td{
+    width: 20px;    
+}
+td.b{
+    font-size: normal;  
+    bbackground-color: #EEEEEE;
+}
+span.xl{
+    font-size: x-large;
+}
+span.l{
+    font-size: large;
+}
+span.sudoku{
+    font-family: "Courier New", Courier, monospace
+}
+img {
+    vertical-align: middle;
+}
+a.non_empty{
+    background-color: red;
+}
+.ta{
+    width: 50%;
+    height: 100px;
+}
+</style>
+</head>
+
+<body>
+<center>
+<span class=xl>
+{{ title | default('') }}
+</span>
+<br>
+<a href="/"><img src="/static/mascot.jpe" alt="" style="height:75px;"></a>
+</center>
+<p>
+
+{% macro print(list, label='', expand='no') -%}
+    <span class=l>{{ label }}:</span><br>
+    {% if expand == 'no' %}
+        {{ list }}
+    {% elif expand == 'yes' %}
+        {% for i in list %}
+            {{ i }}<br>
+        {% endfor %}
+    {% endif %}
+    <p>
+{%- endmacro %}
+
+{% macro print_table(list, label='') -%}
+    <span class=l>{{ label }}:</span>
+    <table>
+    {% for i in list %}
+        <tr>
+        {% for j in i %}
+            <td>
+            {{ j }}
+            </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+    <p>
+{%- endmacro %}
+
+{% macro printl(list, label='', page='/') -%}
+    <span class=l>{{ label }}:</span><br>
+    {% for i in list %}
+        <a href=/{{ page }}?arg={{ i }}>[{{ i }}]</a> 
+    {% endfor %}
+    <br>
+{%- endmacro %}
+
+{% macro print_links() -%}
+    <a href=/>[Home]</a> <a href=/contact>[Contact]</a>  
+    <p>
+{%- endmacro %}
+
+{% macro print_intro(link) -%}
+    Click <a href=/{{ link }}>[reset]</a> to randomise the input.
+    <p>
+{%- endmacro %}
+
+{% macro build_index(n, link, descrip) -%}
+    <li><a href={{ n }}>{{ link }}:</a>
+    {{ descrip }}
+    </li>
+{%- endmacro %}
+
+{% macro print_textarea(text, name) -%}
+    <form name=input method=post>
+        <textarea class=ta onkeyup=process() name={{ name }} rows="15">{{ text }}</textarea>
+        <br>
+        <input type=submit value=Submit>
+    </form>
+{%- endmacro %}
+
+{% if not page %}
+    <!--Default-->
+    {{ print_links() }}
+    {{ outpt|safe }}
+
+
+
+
+
+{% endif %}
+<p>
+<p>
+</body>
+</html>

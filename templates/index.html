@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../static/style.css">
+<title>{{ title }}</title>
+</head>
+
+<body>
+<center>
+<span class=xl>
+{{ title }}
+</span>
+<br>
+louisbb@iprimus.com.au<br>
+{% if mascot %}
+    <a href="/"><img src="/static/mascot.jpe" alt="" style="height:100px;"></a>
+{% endif %}
+</center>
+<p>
+
+{% macro print(list, label='', expand='no') -%}
+    <span class=l>{{ label }}:</span><br>
+    {% if expand == 'no' %}
+        {{ list }}
+    {% elif expand == 'yes' %}
+        {% for i in list %}
+            {{ i }}<br>
+        {% endfor %}
+    {% endif %}
+    <p>
+{%- endmacro %}
+
+{% macro print_table(list, label='') -%}
+    <span class=l>{{ label }}:</span>
+    <table>
+    {% for i in list %}
+        <tr>
+        {% for j in i %}
+            <td>
+            {{ j }}
+            </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+    <p>
+{%- endmacro %}
+
+{% macro printl(list, label='', page='/') -%}
+    <span class=l>{{ label }}:</span><br>
+    {% for i in list %}
+        <a href=/{{ page }}?arg={{ i }}>[{{ i }}]</a> 
+    {% endfor %}
+    <br>
+{%- endmacro %}
+
+{% macro print_links() -%}
+    <a href=/>Home</a>  
+    <p>
+{%- endmacro %}
+
+{% macro print_intro(link) -%}
+    Click <a href=/{{ link }}>[reset]</a> to randomise the input.
+    <p>
+{%- endmacro %}
+
+{% macro build_index(n, link, descrip) -%}
+    <li><a href={{ n }}>{{ link }}:</a>
+    {{ descrip }}
+    </li>
+{%- endmacro %}
+
+{% macro print_textarea(text, name) -%}
+    <form name=input method=post>
+        <textarea class=ta onkeyup=process() name={{ name }} rows="15">{{ text }}</textarea>
+        <br>
+        <input type=submit value=Submit>
+    </form>
+{%- endmacro %}
+
+{% if not page %}
+    <!--Default-->
+    {{ print_links() }}
+    {{ outpt|safe }}
+    <br>
+
+
+{% elif page == 1 %}
+    <!--Binary Search-->
+    {{ print_links() }}
+    Use the binary search algorithm to find a randomly chosen number ({{ outpt[-1] }}) in a sorted list.
+    {{ print_intro(page) }}
+    <p>
+    {% for i in outpt %}
+        <span class=l>Step {{ loop.index }}:</span><br>
+        {{ i }}<br>
+    {% endfor %}
+    <p>
+
+{% elif page == 2 %}
+    <!--Palindromes-->
+    {{ print_links() }}
+    {{ print_intro(page) }} 
+    {{ print(inpt, label='Input') }}
+    {{ print(outpt, label='Output') }}
+
+{% elif page == '3' %}
+    <!--1+2+...+9=100-->
+    {{ print_links() }}
+    {{ print_intro(page + '?arg=1') }}
+    {{ print(outpt, label='Output', expand='yes') }}
+    <a href=https://adriann.github.io/programming_problems.html>[Source]</a>
+
+{% elif page == 4 %}
+    <!--One-Time Pad Encryption-->
+    {{ print_links() }}
+    {{ print_intro(page) }}
+    {{ print(inpt2, label='Key') }}
+    {{ print(outpt1, label='Ciphertext') }}
+    {{ print(outpt2, label='Plaintext') }}
+
+{% elif page == 5 %}
+    <!--Generate substrings-->
+    {{ print_links() }}
+    {{ print(inpt, label='Input') }}
+    {{ print(outpt, label='Output') }}
+
+{% elif page == 6 %}
+    <!--Sudoku-->
+    {{ print_links() }}
+    Please be patient. Some of the puzzles are hard to solve!
+    {{ print_intro(page) }}
+    {{ print_table(inpt, label='Input') }}
+    {{ print_table(outpt, label='Output') }}
+
+{% elif page == 9 %}
+    <!--Staff Messageboard-->
+    {{ print_links() }}
+    {% if mode == 1 %}
+        {{ outpt[0]|safe }}<br>
+        {{ print_textarea(outpt[1], '3') }}
+    {% else %}
+        {{ outpt|safe }}
+    {% endif %}
+
+{% elif page == 10 %}
+    <!--Customer Database-->
+    {{ print_links() }}
+    {{ intro|safe }}
+    {{ print_table(inpt, label='Input') }}
+    {{ print_table(outpt1[1], label=outpt1[0]) }}
+    {{ print_table(outpt2[1], label=outpt2[0]) }}
+
+{% elif page == 11 %}
+    <!--Email Scraper-->
+    {{ print_links() }}
+    {{ print(inpt, label='Input') }}
+    {{ print(outpt, label='Output', expand='yes') }}
+
+{% elif page == 12 %}
+    <!--Comment Wall-->
+    {{ print_links() }}
+    {{ outpt | safe }}
+    {% if showform %}
+        <form name=input method=post>
+        <!--<input class=ta type=textarea rows=15 name=arg><p>
+        -->
+        <textarea class=ta onkeyup=process() name=arg rows="15">Leave a comment...</textarea>
+        <br>
+        <input type=submit value=Submit>
+        </form>
+    {% else %}
+        <a href=/{{ page }}>[Go Back]</a><br>
+    {% endif %}
+
+{% elif page == 13 %}
+    <!--Login Test-->
+    {{ print_links() }}
+    {{ outpt|safe }}
+
+        <form method="POST">
+            User:<input type=text name=1>
+            <br>   
+            Password:<input type=text name=2>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+
+
+{% elif page == 'contact' %}
+    <!--Contact Page-->
+    {{ print_links() }}
+    Hello and welcome to Perth Python Lab. We specialise in helping 
+    small organisations who are looking for a customised website plug-in or 
+    software product.  Our main website plug-ins are: <p>
+    <a href=/9>Calendar-noticeboard:</a> a colourised messaging/reminder system
+    suitable for one person or a small organisation.<br>
+    <a href=/10>Database:</a> a simple database/spreadsheet.  We can customise
+    this or any other of our products to meet your exact needs.<br>
+    <a href=/8>Graphics-demo:</a> a staff performance graphics-demo.<p>
+    Feel free to <a href=/>browse our website.</a> <p>
+    <br>
+
+{% else %}
+    <!-- Index -->
+    {{ print_links() }}
+    {% for i in outpt %}
+        <span class=xl>{{ i[0] }}</span>
+        <br>
+        <b>{{ i[1] }}</b>
+        <p>
+        {% for j in i[2] %}
+            <a href=/{{ i[0] }}/{{ loop.index }}>{{ j[0] }}:</a> {{ j[1] }}
+            <br>
+        {% endfor %}
+        <br>
+    {% endfor %}
+
+
+
+{% endif %}
+<p>
+<br>
+<br>
+<br>
+<br>
+
+<center>
+</center>
+</body>
+</html>
+
